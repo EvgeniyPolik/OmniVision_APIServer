@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "uv6QPnZbOuYfBOHI9g8potxaVbdnTr/Iyro4nrYMvfDPOZuTU6sFbNt4NUNnRpKpooHE+N8msPzd9YFiZzHNTA==",
+  "success": true,
+  "projectFilePath": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\polie\\.nuget\\packages\\firebirdsql.data.firebirdclient\\9.0.1\\firebirdsql.data.firebirdclient.9.0.1.nupkg.sha512",
+    "C:\\Users\\polie\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\polie\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\polie\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\polie\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\polie\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\polie\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "C:\\Users\\polie\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\polie\\.nuget\\packages\\system.text.encoding.codepages\\7.0.0-preview.4.22229.4\\system.text.encoding.codepages.7.0.0-preview.4.22229.4.nupkg.sha512"
+  ],
+  "logs": []
+}
