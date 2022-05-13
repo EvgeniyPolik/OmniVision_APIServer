@@ -28,3 +28,34 @@ D:\Rider\education C#\OmniVision\OmniVision\OmniVision_APIserver\obj\Debug\net6.
 D:\Rider\education C#\OmniVision\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
 D:\Rider\education C#\OmniVision\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
 D:\Rider\education C#\OmniVision\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\appsettings.Development.json
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\appsettings.json
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\OmniVision_APIserver.exe
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\OmniVision_APIserver.deps.json
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\OmniVision_APIserver.runtimeconfig.json
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\OmniVision_APIserver.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\OmniVision_APIserver.pdb
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.csproj.AssemblyReference.cache
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.GeneratedMSBuildEditorConfig.editorconfig
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.AssemblyInfoInputs.cache
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.AssemblyInfo.cs
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.csproj.CoreCompileInputs.cache
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.MvcApplicationPartsAssemblyInfo.cs
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.MvcApplicationPartsAssemblyInfo.cache
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\staticwebassets.build.json
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\staticwebassets.development.json
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\scopedcss\bundle\OmniVision_APIserver.styles.css
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.csproj.CopyComplete
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\refint\OmniVision_APIserver.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.pdb
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\OmniVision_APIserver.genruntimeconfig.cache
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\ref\OmniVision_APIserver.dll
+C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\Newtonsoft.Json.dll
