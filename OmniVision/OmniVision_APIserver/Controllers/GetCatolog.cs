@@ -13,9 +13,9 @@ public class GetCatolog : Controller
     {
         
         string result ="endoffile";
-        if (id < Program.listOfBollers.Count)
+        if (id < Program.ListOfBollers.Count)
         {
-            result = JsonConvert.SerializeObject(Program.listOfBollers[id]);
+            result = JsonConvert.SerializeObject(Program.ListOfBollers[id]);
         } 
         return result;
     }

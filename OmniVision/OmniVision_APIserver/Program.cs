@@ -4,24 +4,46 @@
 //Установить FirebirdSQL.EntityFrameworkCore.Firebird
 //Установить System.Text.Encoding.CodePage + добавить зависимость от соответсвующей длл 
 //Установить Newtonsoft.Json 
+//Использована длл easymodbus.dll установить зависимость
 using System.Text;
 using System.Threading;
+using Modbus;
 using FirebirdSql.Data.FirebirdClient;
+using Newtonsoft.Json;
+
 namespace OmniVision_APIserver
 {
     internal class Program
     {
-        public static List<Boller> listOfBollers = new List<Boller>();
+        public static List<Boller> ListOfBollers = new List<Boller>();
+        public static Dictionary<int, bool[]> HealthBoller = new Dictionary<int, bool[]>();
 
         public static void UpdateCatalog()
         {
             while (true)
             {
-                listOfBollers = MakeNewCatalog();
+                ListOfBollers = MakeNewCatalog();
                 Console.WriteLine("Update" + DateTime.Now);
                 Thread.Sleep(900 * 1000);
             }
         }
+        
+         public static void UpdHealth()
+         {
+             Console.WriteLine("2");
+             HealthBoller.Clear();
+             bool[] status = new bool[4];
+             for (int i = 0; i < ListOfBollers.Count; i++)
+             {
+                 Console.WriteLine(ListOfBollers[i].Ip);
+                 Mo kontroller = new ModbusClient(ListOfBollers[i].Ip, 502);
+        //         kontroller.Connect();
+        //         status = kontroller.ReadCoils(8192, 4);
+        //         HealthBoller[ListOfBollers[i].Id] = status;
+        //         Console.WriteLine(JsonConvert.SerializeObject(HealthBoller[ListOfBollers[i].Id]));
+             }
+         }
+
         public static List<Boller> MakeNewCatalog()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // Для подключения кодировки win1251
@@ -40,10 +62,10 @@ namespace OmniVision_APIserver
                                                 "K_DEL = 0 AND SHEMA_K > 0", dbConn);
             selectSql.Transaction = fbt; // Инициализация запроса транзакцией
             FbDataReader reader = selectSql.ExecuteReader(); // Выполним запрос
-            listOfBollers.Clear();
+            ListOfBollers.Clear();
             while (reader.Read()) // Запишем результат в переменную для отправки
             {
-                listOfBollers.Add(new Boller(reader.GetInt32(0), reader.GetString(1),
+                ListOfBollers.Add(new Boller(reader.GetInt32(0), reader.GetString(1),
                     reader.GetString(2) + " " + reader.GetString(3), reader.GetString(4) + " " +
                                                                      reader.GetString(5), reader.GetString(6),
                     reader.GetString(7)));
@@ -51,7 +73,7 @@ namespace OmniVision_APIserver
 
             reader.Close(); // Обязательно закрываем запрос
             dbConn.Close();
-            return listOfBollers;
+            return ListOfBollers;
         }
 
         public static void Main(string[] args)
@@ -80,10 +102,14 @@ namespace OmniVision_APIserver
             app.UseAuthorization();
 
             app.MapControllers();
+            
+            MakeNewCatalog();
+            UpdHealth();
+            
+// Организация отдельного потока для создания списка котельных
+            Thread updatingCatalog = new Thread(new ThreadStart(UpdateCatalog));
+            updatingCatalog.Start();
 
-            Thread UpdatingCatalog = new Thread(new ThreadStart(UpdateCatalog));
-            UpdatingCatalog.Start();
-            //listOfBollers = MakeNewCatalog();  // Подготовим начальный список котельных
             
             app.Run();
         }
