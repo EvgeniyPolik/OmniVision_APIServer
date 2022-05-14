@@ -40,6 +40,15 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "NModbus/3.0.72": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/NModbus.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/NModbus.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore/6.2.3": {
         "type": "package",
         "dependencies": {
@@ -217,6 +226,30 @@
         "packageIcon.png"
       ]
     },
+    "NModbus/3.0.72": {
+      "sha512": "OVlIA4G8y5/QZercCg1A6772n0TZ7ag7Pxlw4jJRNqfT5ur1f0qwrjhYKiWS8C67dKX+4S9SEe7WTE9CPwvLrw==",
+      "type": "package",
+      "path": "nmodbus/3.0.72",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/net45/NModbus.dll",
+        "lib/net45/NModbus.xml",
+        "lib/net46/NModbus.dll",
+        "lib/net46/NModbus.xml",
+        "lib/net5.0/NModbus.dll",
+        "lib/net5.0/NModbus.xml",
+        "lib/net6.0/NModbus.dll",
+        "lib/net6.0/NModbus.xml",
+        "lib/netstandard1.3/NModbus.dll",
+        "lib/netstandard1.3/NModbus.xml",
+        "lib/netstandard2.0/NModbus.dll",
+        "lib/netstandard2.0/NModbus.xml",
+        "nmodbus.3.0.72.nupkg.sha512",
+        "nmodbus.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/6.2.3": {
       "sha512": "cnzQDn0Le+hInsw2SYwlOhOCPXpYi/szcvnyqZJ12v+QyrLBwAmWXBg6RIyHB18s/mLeywC+Rg2O9ndz0IUNYQ==",
       "type": "package",
@@ -364,30 +397,38 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "FirebirdSql.Data.FirebirdClient >= 9.0.1",
+      "NModbus >= 3.0.72",
       "Newtonsoft.Json >= 13.0.1",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "System.Text.Encoding.CodePages >= 7.0.0-preview.4.22229.4"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {}
+    "C:\\Users\\polie\\.nuget\\packages\\": {},
+    "D:\\ProgramFiles\\Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+      "projectUniqueName": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
       "projectName": "OmniVision_APIserver",
-      "projectPath": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\obj\\",
+      "projectPath": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+      "packagesPath": "C:\\Users\\polie\\.nuget\\packages\\",
+      "outputPath": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\ProgramFiles\\Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\polie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -409,6 +450,10 @@
           "FirebirdSql.Data.FirebirdClient": {
             "target": "Package",
             "version": "[9.0.1, )"
+          },
+          "NModbus": {
+            "target": "Package",
+            "version": "[3.0.72, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",
@@ -441,7 +486,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

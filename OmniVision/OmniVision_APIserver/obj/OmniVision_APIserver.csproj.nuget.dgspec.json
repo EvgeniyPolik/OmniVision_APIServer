@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj": {}
+    "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj": {}
   },
   "projects": {
-    "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj": {
+    "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+        "projectUniqueName": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
         "projectName": "OmniVision_APIserver",
-        "projectPath": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\obj\\",
+        "projectPath": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+        "packagesPath": "C:\\Users\\polie\\.nuget\\packages\\",
+        "outputPath": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\ProgramFiles\\Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\polie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,6 +47,10 @@
             "FirebirdSql.Data.FirebirdClient": {
               "target": "Package",
               "version": "[9.0.1, )"
+            },
+            "NModbus": {
+              "target": "Package",
+              "version": "[3.0.72, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -73,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

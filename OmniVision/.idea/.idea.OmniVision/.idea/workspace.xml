@@ -6,23 +6,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3243d9d2-2b05-411b-9704-b454a8b88978" name="Changes" comment="Есть реализация получения и обновления первичного списка в отдельном потоке.">
-      <change afterPath="$PROJECT_DIR$/OmniVision_APIserver/EasyModbus.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Boller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Boller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Controllers/GetCatolog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Controllers/GetCatolog.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/OmniVision_APIserver.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/OmniVision_APIserver.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/apphost.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/ref/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/ref/OmniVision_APIserver.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/refint/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/refint/OmniVision_APIserver.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/staticwebassets.pack.sentinel" afterDir="false" />
     </list>
@@ -30,6 +37,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/39d136a4b61dea46e86e51cbd20542ef96f5ad7c6a449a1668b48dabfa4a10/FbConnectionStringBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -40,19 +54,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "firebird"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;firebird&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.OmniVision_APIserver">
     <configuration name="OmniVision_APIserver.Program.UpdHealth" type="DotNetStaticMethod" factoryName=".NET Static Method" temporary="true">
       <option name="EXE_PATH" value="C:\Program Files\JetBrains\JetBrains Rider 2021.3.3\lib\ReSharperHost\JetLauncherILc.exe" />
@@ -116,6 +130,8 @@
       <updated>1652365791992</updated>
       <workItem from="1652365791994" duration="8924000" />
       <workItem from="1652411197944" duration="23331000" />
+      <workItem from="1652531009837" duration="3203000" />
+      <workItem from="1652546218913" duration="3116000" />
     </task>
     <task id="LOCAL-00001" summary="Есть реализация получения и обновления первичного списка в отдельном потоке.">
       <created>1652436949566</created>

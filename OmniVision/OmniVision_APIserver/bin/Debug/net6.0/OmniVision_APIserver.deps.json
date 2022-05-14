@@ -8,22 +8,14 @@
     ".NETCoreApp,Version=v6.0": {
       "OmniVision_APIserver/1.0.0": {
         "dependencies": {
-          "EasyModbusTCP": "5.6.0",
           "FirebirdSql.Data.FirebirdClient": "9.0.1",
+          "NModbus": "3.0.72",
           "Newtonsoft.Json": "13.0.1",
           "Swashbuckle.AspNetCore": "6.2.3",
           "System.Text.Encoding.CodePages": "7.0.0-preview.4.22229.4"
         },
         "runtime": {
           "OmniVision_APIserver.dll": {}
-        }
-      },
-      "EasyModbusTCP/5.6.0": {
-        "runtime": {
-          "lib/net40/EasyModbus.dll": {
-            "assemblyVersion": "5.6.0.0",
-            "fileVersion": "5.6.0.0"
-          }
         }
       },
       "FirebirdSql.Data.FirebirdClient/9.0.1": {
@@ -48,6 +40,14 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "13.0.0.0",
             "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
+      "NModbus/3.0.72": {
+        "runtime": {
+          "lib/net6.0/NModbus.dll": {
+            "assemblyVersion": "3.0.72.0",
+            "fileVersion": "3.0.72.0"
           }
         }
       },
@@ -117,13 +117,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "EasyModbusTCP/5.6.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-2a5a9smmIu0Tq5zdwMvgO+WDvUgH0JuNv/crAILrDKcNRb8P/AOx9PEyegBiMn1TGXLP3byu0zhsSSUrrVyyXw==",
-      "path": "easymodbustcp/5.6.0",
-      "hashPath": "easymodbustcp.5.6.0.nupkg.sha512"
-    },
     "FirebirdSql.Data.FirebirdClient/9.0.1": {
       "type": "package",
       "serviceable": true,
@@ -151,6 +144,13 @@
       "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "NModbus/3.0.72": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OVlIA4G8y5/QZercCg1A6772n0TZ7ag7Pxlw4jJRNqfT5ur1f0qwrjhYKiWS8C67dKX+4S9SEe7WTE9CPwvLrw==",
+      "path": "nmodbus/3.0.72",
+      "hashPath": "nmodbus.3.0.72.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.2.3": {
       "type": "package",

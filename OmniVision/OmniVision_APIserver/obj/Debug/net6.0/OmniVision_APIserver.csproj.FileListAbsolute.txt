@@ -60,3 +60,5 @@ C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\
 C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\obj\Debug\net6.0\ref\OmniVision_APIserver.dll
 C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\C#\OmniVision\OmniVision_APIServer\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\EasyModbus.dll
+D:\Rider\education C#\OmniVision\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Rider\education C#\OmniVision\OmniVision\OmniVision_APIserver\bin\Debug\net6.0\NModbus.dll
