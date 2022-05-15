@@ -7,11 +7,9 @@ namespace OmniVision_APIserver.Controllers;
 [ApiController]
 public class GetCatolog : Controller
 {
-    
     [HttpGet("{id}")]  // Считает id из адресной строки ниже этой записи метод GET
     public string GetReguest(int id)
     {
-        
         string result ="endoffile";
         if (id < Program.ListOfBollers.Count)
         {

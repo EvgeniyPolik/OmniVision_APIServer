@@ -21,7 +21,7 @@ namespace OmniVision_APIserver
     {
         public static List<Boller> ListOfBollers = new List<Boller>();
         public static Dictionary<int, ushort[]> HealthBoller = new Dictionary<int, ushort[]>();
-        
+        public static SortedSet<string> Warnings = new SortedSet<string>();
 
         private static ushort[] BoolToUshort(bool[] originArray)
         {
@@ -71,7 +71,7 @@ namespace OmniVision_APIserver
             return result;
         }
         
-        private static void UpdateCatalog()
+        private static void UpdateCatalog()  // поток обновления информации
         {
             int countRepit = 120;
             while (true)
@@ -116,10 +116,15 @@ namespace OmniVision_APIserver
                  {
                      status = noAnswerArray();
                  }
+
+                 HealthBoller[ListOfBollers[i].Id] = status;
                  for (int z = 0; z < status.Length; z++)
                      Console.Write($"{z + 1}: {status[z]} ");
                  Console.WriteLine();    
              }
+
+             AnaliticMetods analitics = new AnaliticMetods();
+             Warnings = analitics.ActiveWarnings(HealthBoller);
          }
 
         private static List<Boller> MakeNewCatalog()
@@ -181,6 +186,7 @@ namespace OmniVision_APIserver
             app.MapControllers();
          
 // Организация отдельного потока для создания списка котельных
+            
             Thread updatingCatalog = new Thread(new ThreadStart(UpdateCatalog));
             updatingCatalog.Start();
            
