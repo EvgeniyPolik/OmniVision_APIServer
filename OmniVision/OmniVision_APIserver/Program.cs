@@ -6,10 +6,9 @@
 //Установить Newtonsoft.Json 
 //Использована длл FluentModbus установить зависимость
 
-using System.Net;
+
 using System.Net.Sockets;
 using NModbus;
-using NModbus.Utility;
 using System.Text;
 using System.Threading;
 
@@ -21,9 +20,58 @@ namespace OmniVision_APIserver
     internal class Program
     {
         public static List<Boller> ListOfBollers = new List<Boller>();
-        public static Dictionary<int, bool[]> HealthBoller = new Dictionary<int, bool[]>();
+        public static Dictionary<int, ushort[]> HealthBoller = new Dictionary<int, ushort[]>();
+        
 
-        public static void UpdateCatalog()
+        private static ushort[] BoolToUshort(bool[] originArray)
+        {
+            ushort[] makedArrey = new ushort[originArray.Length];
+            for (int i = 0; i < originArray.Length; i++)
+            {
+                if (originArray[i])
+                {
+                    makedArrey[i] = 1;
+                }
+                else
+                {
+                    makedArrey[i] = 0;
+                }
+            }
+            return makedArrey;
+        }
+
+        private static ushort[] SummQudroArray(ushort[] analogInp, ushort[] discreteInp, ushort[] discreteOut,
+            ushort[] flags)
+        {
+            ushort[] result = new ushort[analogInp.Length + discreteInp.Length + discreteOut.Length + flags.Length + 1];
+            result[0] = 1;
+            for (int i = 0; i < analogInp.Length; i++)
+            {
+                result[i + 1] = analogInp[i];
+            }
+            for (int i = 0; i < discreteInp.Length; i++)
+            {
+                result[i + analogInp.Length + 1] = discreteInp[i];
+            }
+            for (int i = 0; i < discreteOut.Length; i++)
+            {
+                result[i + analogInp.Length + discreteInp.Length + 1] = discreteOut[i];
+            }
+            for (int i = 0; i < flags.Length; i++)
+            {
+                result[i + analogInp.Length + discreteInp.Length + discreteOut.Length + 1] = flags[i];
+            }
+            return result;
+        }
+
+        private static ushort[] noAnswerArray()
+        {
+            ushort[] result = new ushort[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+            return result;
+        }
+        
+        private static void UpdateCatalog()
         {
             int countRepit = 120;
             while (true)
@@ -46,28 +94,35 @@ namespace OmniVision_APIserver
             }
         }
         
-         public static void UpdHealth()
+         private static void UpdHealth()
          {
              HealthBoller.Clear();
              Console.WriteLine($"New helth information on {DateTime.Now}: ");
              for (int i = 0; i < ListOfBollers.Count; i++)
              {
-                 TcpClient clientTCP = new TcpClient(ListOfBollers[i].Ip, 502);
-                 var targetKontroller = new ModbusFactory();
-                 IModbusMaster modbusServer = targetKontroller.CreateMaster(clientTCP);
-                 bool[] dq = modbusServer.ReadCoils(0, 8192, 4);  // Discrete outputs
-                 ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 2);  // Analog inputs
-                 bool[] di = modbusServer.ReadInputs(0, 0, 6); // Discrete inputs
-                 bool[] flag = modbusServer.ReadCoils(0, 8258, 1); // Read flag
-                 Console.WriteLine($"Q1:{dq[0]}, Q2:{dq[1]}, Q3:{dq[2]}, Q4:{dq[3]}"); 
-                 Console.WriteLine($"A1:{ai[0]}, A2:{ai[1]}"); 
-                 Console.WriteLine($"I1:{di[0]}, I2:{di[1]}, I3:{di[2]}, I4:{di[3]}, I5:{di[4]}, I6:{di[5]}");
-                 Console.WriteLine($"Flag M3:{flag[0]}");
-
+                 ushort[] status = new ushort[4];
+                 try
+                 {
+                     TcpClient clientTCP = new TcpClient(ListOfBollers[i].Ip, 502);
+                     var targetKontroller = new ModbusFactory();
+                     IModbusMaster modbusServer = targetKontroller.CreateMaster(clientTCP);
+                     ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0, 8192, 4)); // Discrete outputs
+                     ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 2); // Analog inputs
+                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 0, 6)); // Discrete inputs
+                     ushort[] flag = BoolToUshort(modbusServer.ReadCoils(0, 8258, 1)); // Read flag
+                     status = SummQudroArray(ai, di, dq, flag);
+                 }
+                 catch (SocketException ex)
+                 {
+                     status = noAnswerArray();
+                 }
+                 for (int z = 0; z < status.Length; z++)
+                     Console.Write($"{z + 1}: {status[z]} ");
+                 Console.WriteLine();    
              }
          }
 
-        public static List<Boller> MakeNewCatalog()
+        private static List<Boller> MakeNewCatalog()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // Для подключения кодировки win1251
             FbConnectionStringBuilder fbConn = new FbConnectionStringBuilder(); // Переменная с параметрами подключения к БД
@@ -98,7 +153,7 @@ namespace OmniVision_APIserver
             return ListOfBollers;
         }
 
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
