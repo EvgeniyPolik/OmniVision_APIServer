@@ -67,10 +67,29 @@ public class AnaliticMetods
                                        $"'Устранено: отсутствие связи')";
                     InsertQuery(newQuery);
                 }
-
-                if (bollerStatus[key.Key][1] < 35)
+                // Температура подачи ниже 35 градусов и включен режим Зима
+                if ((bollerStatus[key.Key][1] < 35) && (bollerStatus[key.Key][13] == 1))
                 {
-                    // Предельно низкая температура подачи
+                    item = key.Key.ToString() + positionName.temperatureUP.ToString() + "0";
+                    newActiveWarnings.Add(item);
+                    if (!Program.Warnings.Contains(item))
+                    {
+                        string newQuery = $"INSERT INTO EVENET_LOG (E_DATE, E_TIME, E_KOT, E_TEXT) VALUES " +
+                                          $"({doDateOrTimeInString(true)}, {doDateOrTimeInString(false)}, {key.Key}, " +
+                                          $"'Обнаружено: предельно низкая температура подачи')";
+                        InsertQuery(newQuery);
+                    }
+                }
+                else
+                {
+                    item = key.Key.ToString() + positionName.temperatureUP.ToString() + "0";
+                    if (Program.Warnings.Contains(item))
+                    {
+                        string newQuery = $"INSERT INTO EVENET_LOG (E_DATE, E_TIME, E_KOT, E_TEXT) VALUES " +
+                                          $"({doDateOrTimeInString(true)}, {doDateOrTimeInString(false)}, {key.Key}, " +
+                                          $"'Устранено: предельно низкая температура подачи')";
+                        InsertQuery(newQuery);
+                    }
                 }
             }
         }

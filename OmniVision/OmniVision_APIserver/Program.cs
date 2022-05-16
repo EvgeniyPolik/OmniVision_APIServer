@@ -7,6 +7,7 @@
 //Использована длл FluentModbus установить зависимость
 
 
+using System.Net.Mime;
 using System.Net.Sockets;
 using NModbus;
 using System.Text;
@@ -76,12 +77,12 @@ namespace OmniVision_APIserver
         private static void UpdateCatalog()  // поток обновления информации
         {
             int countRepit = 120;
-            dbConn = MakeConnectDb();  // Создание конекта к БД
+            dbConn = MadeConnectDb();  // Создание конекта к БД
             while (true)
             {
                 if (countRepit > 119)  // Переодическое бновление списка котельных
                 {
-                    ListOfBollers = MakeNewCatalog();
+                    ListOfBollers = MadeNewCatalog();
                     Console.WriteLine("Update catalog: " + DateTime.Now);
                     HealthBoller = UpdHealth();
                     countRepit = 0;
@@ -129,21 +130,52 @@ namespace OmniVision_APIserver
              return newHeathStatus;
          }
 
-         private static FbConnection MakeConnectDb()  // Создание конекта к БД
+         private static FbConnection MadeConnectDb()  // Создание конекта к БД
          {
              Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // Для подключения кодировки win1251
              FbConnectionStringBuilder fbConn = new FbConnectionStringBuilder(); // Переменная с параметрами подключения к БД
-             fbConn.DataSource = "127.0.0.1"; // Записываем в переменную параметры
-             fbConn.Database = @"c:\C#\OmniVision\MBD.fdb";
-             fbConn.UserID = "SYSDBA";
-             fbConn.Password = "masterkey";
-             fbConn.Charset = "WIN1251";
-             fbConn.ServerType = FbServerType.Default;
-             FbConnection dbCursor = new FbConnection(fbConn.ToString()); // Создадим коннект к БД
+              // Записываем в переменную параметры
+             FbConnection dbCursor = new FbConnection();
+             while (true)
+             {
+                 try  // Проверим корректность настроек БД
+                 {   
+                     string[] param = new String[2];
+                     param = File.ReadAllLines("conf.cfg");
+                     fbConn.DataSource = param[0];
+                     fbConn.Database = param[1];
+                     fbConn.UserID = "SYSDBA";
+                     fbConn.Password = "masterkey";
+                     fbConn.Charset = "WIN1251";
+                     fbConn.ServerType = FbServerType.Default;
+                     dbCursor.ConnectionString = fbConn.ToString();
+                     dbCursor.Open();
+                     dbCursor.Close();
+                     break;
+                 }
+                 catch (Exception)
+                 {
+                     Console.WriteLine("База данных не доступна. Уточниете настройки или введите exit для выхода");
+                     Console.Write("Адрес сервера #:");
+                     fbConn.DataSource =  Console.ReadLine();
+                     if (fbConn.DataSource == "exit")
+                     {
+                         Environment.Exit(0);  // От настройки отказались выходим
+                     }
+                     string[] param = new String[2];
+                     param[0] = fbConn.DataSource;
+                     Console.Write("Путь до БД #:");
+                     fbConn.Database =  Console.ReadLine();
+                     param[1] = fbConn.Database;
+                     File.WriteAllLines("conf.cfg", param);
+                     dbCursor.ConnectionString = fbConn.ToString();
+                 }
+             }
+            
              return dbCursor;
          }
          
-        private static List<Boller> MakeNewCatalog()
+        private static List<Boller> MadeNewCatalog()
         {
 
             dbConn.Open(); // Активируем коннект
