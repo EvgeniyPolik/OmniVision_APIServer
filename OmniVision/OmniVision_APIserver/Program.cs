@@ -2,7 +2,7 @@
 //Установить EntityFrameworkCore.FirebirdSQL
 //Установить EntityFramework.Firebird
 //Установить FirebirdSQL.EntityFrameworkCore.Firebird
-//Установить System.Text.Encoding.CodePage + добавить зависимость от соответсвующей длл 
+//Установить System.Text.Encoding.CodePage + добавить зависимость от соответсвующей длл для кодировок!!!
 //Установить Newtonsoft.Json 
 //Использована длл FluentModbus установить зависимость
 
@@ -22,6 +22,7 @@ namespace OmniVision_APIserver
         public static List<Boller> ListOfBollers = new List<Boller>();
         public static Dictionary<int, ushort[]> HealthBoller = new Dictionary<int, ushort[]>();
         public static SortedSet<string> Warnings = new SortedSet<string>();
+        public static FbConnection dbConn = new FbConnection();
 
         private static ushort[] BoolToUshort(bool[] originArray)
         {
@@ -40,6 +41,7 @@ namespace OmniVision_APIserver
             return makedArrey;
         }
 
+        //  Соединение 4х параметров в единый массив
         private static ushort[] SummQudroArray(ushort[] analogInp, ushort[] discreteInp, ushort[] discreteOut,
             ushort[] flags)
         {
@@ -47,7 +49,7 @@ namespace OmniVision_APIserver
             result[0] = 1;
             for (int i = 0; i < analogInp.Length; i++)
             {
-                result[i + 1] = analogInp[i];
+                result[i + 1] = (ushort)(analogInp[i] - 273);
             }
             for (int i = 0; i < discreteInp.Length; i++)
             {
@@ -74,19 +76,20 @@ namespace OmniVision_APIserver
         private static void UpdateCatalog()  // поток обновления информации
         {
             int countRepit = 120;
+            dbConn = MakeConnectDb();  // Создание конекта к БД
             while (true)
             {
-                if (countRepit > 119)
+                if (countRepit > 119)  // Переодическое бновление списка котельных
                 {
                     ListOfBollers = MakeNewCatalog();
                     Console.WriteLine("Update catalog: " + DateTime.Now);
-                    UpdHealth();
+                    HealthBoller = UpdHealth();
                     countRepit = 0;
                     Thread.Sleep(15 * 1000);
                 }
                 else
                 {
-                    UpdHealth();
+                    HealthBoller = UpdHealth();  // Чтение параметров работы котельных
                     countRepit++;
                     Thread.Sleep(15 * 1000);
                 }
@@ -94,10 +97,9 @@ namespace OmniVision_APIserver
             }
         }
         
-         private static void UpdHealth()
+         private static Dictionary<int, ushort[]> UpdHealth()  // Обновление списка состояния котельных
          {
-             HealthBoller.Clear();
-             Console.WriteLine($"New helth information on {DateTime.Now}: ");
+             Dictionary<int, ushort[]> newHeathStatus = new Dictionary<int, ushort[]>();
              for (int i = 0; i < ListOfBollers.Count; i++)
              {
                  ushort[] status = new ushort[4];
@@ -107,9 +109,9 @@ namespace OmniVision_APIserver
                      var targetKontroller = new ModbusFactory();
                      IModbusMaster modbusServer = targetKontroller.CreateMaster(clientTCP);
                      ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0, 8192, 4)); // Discrete outputs
-                     ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 2); // Analog inputs
-                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 0, 6)); // Discrete inputs
-                     ushort[] flag = BoolToUshort(modbusServer.ReadCoils(0, 8258, 1)); // Read flag
+                     ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 3); // Analog inputs
+                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 0, 5)); // Discrete inputs
+                     ushort[] flag = BoolToUshort(modbusServer.ReadCoils(0, 8258, 2)); // Read flag
                      status = SummQudroArray(ai, di, dq, flag);
                  }
                  catch (SocketException ex)
@@ -117,28 +119,35 @@ namespace OmniVision_APIserver
                      status = noAnswerArray();
                  }
 
-                 HealthBoller[ListOfBollers[i].Id] = status;
-                 for (int z = 0; z < status.Length; z++)
-                     Console.Write($"{z + 1}: {status[z]} ");
-                 Console.WriteLine();    
+                 newHeathStatus[ListOfBollers[i].Id] = status;
+
              }
 
              AnaliticMetods analitics = new AnaliticMetods();
-             Warnings = analitics.ActiveWarnings(HealthBoller);
+             Warnings = analitics.ActiveWarnings(newHeathStatus);
+            
+             return newHeathStatus;
          }
 
+         private static FbConnection MakeConnectDb()  // Создание конекта к БД
+         {
+             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // Для подключения кодировки win1251
+             FbConnectionStringBuilder fbConn = new FbConnectionStringBuilder(); // Переменная с параметрами подключения к БД
+             fbConn.DataSource = "127.0.0.1"; // Записываем в переменную параметры
+             fbConn.Database = @"c:\C#\OmniVision\MBD.fdb";
+             fbConn.UserID = "SYSDBA";
+             fbConn.Password = "masterkey";
+             fbConn.Charset = "WIN1251";
+             fbConn.ServerType = FbServerType.Default;
+             FbConnection dbCursor = new FbConnection(fbConn.ToString()); // Создадим коннект к БД
+             return dbCursor;
+         }
+         
         private static List<Boller> MakeNewCatalog()
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // Для подключения кодировки win1251
-            FbConnectionStringBuilder fbConn = new FbConnectionStringBuilder(); // Переменная с параметрами подключения к БД
-            fbConn.DataSource = "127.0.0.1"; // Записываем в переменную параметры
-            fbConn.Database = @"D:\Rider\education C#\OmniVision\MBD.fdb";
-            fbConn.UserID = "SYSDBA";
-            fbConn.Password = "masterkey";
-            fbConn.Charset = "WIN1251";
-            fbConn.ServerType = FbServerType.Default;
-            FbConnection dbConn = new FbConnection(fbConn.ToString()); // Создадим коннект к БД
+
             dbConn.Open(); // Активируем коннект
+            Console.WriteLine(dbConn.State.ToString());
             FbTransaction fbt = dbConn.BeginTransaction(); //  Создадим транзакцию
             FbCommand selectSql = new FbCommand("SELECT ID_K, NAM_K, TIP_NP, NAM_NP, TIP_U, NAM_U, K_DOM, IP_ADR, SHEMA_K " +
                                                 "FROM KOT LEFT JOIN NP ON K_NP = ID_NP LEFT JOIN ULC ON ID_U = K_U WHERE " +
@@ -186,7 +195,6 @@ namespace OmniVision_APIserver
             app.MapControllers();
          
 // Организация отдельного потока для создания списка котельных
-            
             Thread updatingCatalog = new Thread(new ThreadStart(UpdateCatalog));
             updatingCatalog.Start();
            

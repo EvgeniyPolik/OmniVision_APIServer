@@ -1,12 +1,45 @@
-﻿namespace OmniVision_APIserver;
+﻿using FirebirdSql.Data.FirebirdClient;
+
+namespace OmniVision_APIserver;
 
 public class AnaliticMetods
 {
     private enum positionName
     {
-        connection
+        connection,
+        temperatureUP
     }
-    public SortedSet<string> ActiveWarnings(Dictionary<int, ushort[]> bollerStatus)
+
+    public void InsertQuery(string query)
+    {
+        FbCommand insertSql = new FbCommand(query, Program.dbConn);
+        Program.dbConn.Open();
+        Console.WriteLine(Program.dbConn.State.ToString());
+        FbTransaction fbt = Program.dbConn.BeginTransaction();
+        insertSql.Transaction = fbt;
+        insertSql.ExecuteNonQuery();
+        fbt.Commit();
+        Program.dbConn.Close();
+    }
+    public string doDateOrTimeInString(bool doDate)  // Дата или время в нужном формате
+    {
+        string result;
+        if (doDate)
+        {
+            result = "'" + DateTime.Now.Day.ToString() + ".";
+            result += DateTime.Now.Month.ToString() + ".";
+            result += DateTime.Now.Year.ToString() + "'";
+        }
+        else
+        {
+            result = "'" + DateTime.Now.Hour.ToString() + ".";
+            result += DateTime.Now.Minute.ToString() + "'";
+        }
+        return result;
+    }
+    
+    //Сбор информации о новых и действующих угрозах
+    public SortedSet<string> ActiveWarnings(Dictionary<int, ushort[]> bollerStatus)  
     {
         SortedSet<string> newActiveWarnings = new SortedSet<string>();
         foreach (var key in bollerStatus)
@@ -15,14 +48,29 @@ public class AnaliticMetods
             {
                 string item = key.Key.ToString() + positionName.connection.ToString() + key.Value[0].ToString();
                 newActiveWarnings.Add(item);
-                Console.WriteLine("нет связи с " + key.Key);
                 if (!Program.Warnings.Contains(item))
                 {
-                    Console.WriteLine("Обнаружена новая угроза: нет связи с " + key.Key);
+                    string newQuery =
+                        $"INSERT INTO EVENET_LOG (E_DATE, E_TIME, E_KOT, E_TEXT) VALUES " +
+                        $"({doDateOrTimeInString(true)}, {doDateOrTimeInString(false)}, {key.Key}, " +
+                        $"'Обнаружено: отсутствие связи')";
+                    InsertQuery(newQuery);
                 }
-                else
+            }
+            else
+            {
+                string item = key.Key.ToString() + positionName.connection.ToString() + "0";
+                if (Program.Warnings.Contains(item))
                 {
-                    Console.WriteLine("Неисправность: отсутствие связи устранено");
+                    string newQuery =  $"INSERT INTO EVENET_LOG (E_DATE, E_TIME, E_KOT, E_TEXT) VALUES " +
+                                       $"({doDateOrTimeInString(true)}, {doDateOrTimeInString(false)}, {key.Key}, " +
+                                       $"'Устранено: отсутствие связи')";
+                    InsertQuery(newQuery);
+                }
+
+                if (bollerStatus[key.Key][1] < 35)
+                {
+                    // Предельно низкая температура подачи
                 }
             }
         }
