@@ -44,9 +44,9 @@ namespace OmniVision_APIserver
 
         //  Соединение 4х параметров в единый массив
         private static ushort[] SummQudroArray(ushort[] analogInp, ushort[] discreteInp, ushort[] discreteOut,
-            ushort[] flags)
+            ushort[] flag1, ushort[] flag2)
         {
-            ushort[] result = new ushort[analogInp.Length + discreteInp.Length + discreteOut.Length + flags.Length + 1];
+            ushort[] result = new ushort[analogInp.Length + discreteInp.Length + discreteOut.Length + flag1.Length + flag2.Length + 1];
             result[0] = 1;
             for (int i = 0; i < analogInp.Length; i++)
             {
@@ -60,10 +60,13 @@ namespace OmniVision_APIserver
             {
                 result[i + analogInp.Length + discreteInp.Length + 1] = discreteOut[i];
             }
-            for (int i = 0; i < flags.Length; i++)
-            {
-                result[i + analogInp.Length + discreteInp.Length + discreteOut.Length + 1] = flags[i];
-            }
+    
+            result[analogInp.Length + discreteInp.Length + discreteOut.Length + 1] = flag1[0];
+            result[analogInp.Length + discreteInp.Length + discreteOut.Length + 2] = flag2[0];
+        
+            for (int i = 0; i < result.Length; i++)
+            {Console.Write(result[i].ToString() + " ");}
+            Console.WriteLine();
             return result;
         }
 
@@ -112,8 +115,9 @@ namespace OmniVision_APIserver
                      ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0, 8192, 4)); // Discrete outputs
                      ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 3); // Analog inputs
                      ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 0, 5)); // Discrete inputs
-                     ushort[] flag = BoolToUshort(modbusServer.ReadCoils(0, 8258, 2)); // Read flag
-                     status = SummQudroArray(ai, di, dq, flag);
+                     ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(0, 8258, 1)); // Read flag
+                     ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(0, 8260, 1));
+                     status = SummQudroArray(ai, di, dq, flag1, flag2);
                  }
                  catch (SocketException ex)
                  {

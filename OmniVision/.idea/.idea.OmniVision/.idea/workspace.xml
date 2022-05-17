@@ -8,6 +8,7 @@
     <list default="true" id="3243d9d2-2b05-411b-9704-b454a8b88978" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/AnaliticMetods.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/AnaliticMetods.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" afterDir="false" />
@@ -35,6 +36,10 @@
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/39d136a4b61dea46e86e51cbd20542ef96f5ad7c6a449a1668b48dabfa4a10/FbConnectionStringBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -121,6 +126,12 @@
       <updated>1652365791992</updated>
       <workItem from="1652365791994" duration="8924000" />
       <workItem from="1652411197944" duration="23331000" />
+      <workItem from="1652531009837" duration="3203000" />
+      <workItem from="1652546218913" duration="3231000" />
+      <workItem from="1652559154493" duration="248000" />
+      <workItem from="1652596781102" duration="3304000" />
+      <workItem from="1652629073077" duration="8521000" />
+      <workItem from="1652640003900" duration="400000" />
     </task>
     <task id="LOCAL-00001" summary="Есть реализация получения и обновления первичного списка в отдельном потоке.">
       <created>1652436949566</created>
@@ -129,7 +140,21 @@
       <option name="project" value="LOCAL" />
       <updated>1652436949566</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Организован опрос приборов. Организован поток для обновления списка и постоянного опроса">
+      <created>1652549813175</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652549813175</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Опрос и исключение с ошибкой связи">
+      <created>1652632943732</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1652632943732</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +176,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Есть реализация получения и обновления первичного списка в отдельном потоке." />
-    <option name="LAST_COMMIT_MESSAGE" value="Есть реализация получения и обновления первичного списка в отдельном потоке." />
+    <MESSAGE value="Организован опрос приборов. Организован поток для обновления списка и постоянного опроса" />
+    <MESSAGE value="Опрос и исключение с ошибкой связи" />
+    <option name="LAST_COMMIT_MESSAGE" value="Опрос и исключение с ошибкой связи" />
   </component>
 </project>
