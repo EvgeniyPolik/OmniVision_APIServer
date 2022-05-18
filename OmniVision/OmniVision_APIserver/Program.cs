@@ -21,9 +21,11 @@ namespace OmniVision_APIserver
     internal class Program
     {
         public static List<Boller> ListOfBollers = new List<Boller>();
-        public static Dictionary<int, ushort[]> HealthBoller = new Dictionary<int, ushort[]>();
+        public static Dictionary<int, short[]> HealthBoller = new Dictionary<int, short[]>();
         public static SortedSet<string> Warnings = new SortedSet<string>();
         public static FbConnection dbConn = new FbConnection();
+        public static Dictionary<int, short[]> HourStatusAirTemperature = new Dictionary<int, short[]>();
+        public static Dictionary<int, short[]> HourStatusUpTemperature = new Dictionary<int, short[]>();
 
         private static ushort[] BoolToUshort(bool[] originArray)
         {
@@ -43,26 +45,26 @@ namespace OmniVision_APIserver
         }
 
         //  Соединение 4х параметров в единый массив
-        private static ushort[] SummQudroArray(ushort[] analogInp, ushort[] discreteInp, ushort[] discreteOut,
+        private static short[] SummQudroArray(ushort[] analogInp, ushort[] discreteInp, ushort[] discreteOut,
             ushort[] flag1, ushort[] flag2)
         {
-            ushort[] result = new ushort[analogInp.Length + discreteInp.Length + discreteOut.Length + flag1.Length + flag2.Length + 1];
+            short[] result = new short[analogInp.Length + discreteInp.Length + discreteOut.Length + flag1.Length + flag2.Length + 1];
             result[0] = 1;
             for (int i = 0; i < analogInp.Length; i++)
             {
-                result[i + 1] = (ushort)(analogInp[i] - 273);
+                result[i + 1] = (short)(analogInp[i] - 273);
             }
             for (int i = 0; i < discreteInp.Length; i++)
             {
-                result[i + analogInp.Length + 1] = discreteInp[i];
+                result[i + analogInp.Length + 1] = (short)discreteInp[i];
             }
             for (int i = 0; i < discreteOut.Length; i++)
             {
-                result[i + analogInp.Length + discreteInp.Length + 1] = discreteOut[i];
+                result[i + analogInp.Length + discreteInp.Length + 1] = (short)discreteOut[i];
             }
     
-            result[analogInp.Length + discreteInp.Length + discreteOut.Length + 1] = flag1[0];
-            result[analogInp.Length + discreteInp.Length + discreteOut.Length + 2] = flag2[0];
+            result[analogInp.Length + discreteInp.Length + discreteOut.Length + 1] = (short)flag1[0];
+            result[analogInp.Length + discreteInp.Length + discreteOut.Length + 2] = (short)flag2[0];
         
             for (int i = 0; i < result.Length; i++)
             {Console.Write(result[i].ToString() + " ");}
@@ -70,9 +72,9 @@ namespace OmniVision_APIserver
             return result;
         }
 
-        private static ushort[] noAnswerArray()
+        private static short[] noAnswerArray()
         {
-            ushort[] result = new ushort[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            short[] result = new short[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
             return result;
         }
@@ -101,25 +103,25 @@ namespace OmniVision_APIserver
             }
         }
         
-         private static Dictionary<int, ushort[]> UpdHealth()  // Обновление списка состояния котельных
+         private static Dictionary<int, short[]> UpdHealth()  // Обновление списка состояния котельных
          {
-             Dictionary<int, ushort[]> newHeathStatus = new Dictionary<int, ushort[]>();
+             Dictionary<int, short[]> newHeathStatus = new Dictionary<int, short[]>();
              for (int i = 0; i < ListOfBollers.Count; i++)
              {
-                 ushort[] status = new ushort[4];
+                 short[] status = new short[4];
                  try
                  {
                      TcpClient clientTCP = new TcpClient(ListOfBollers[i].Ip, 502);
                      var targetKontroller = new ModbusFactory();
                      IModbusMaster modbusServer = targetKontroller.CreateMaster(clientTCP);
                      ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0, 8192, 4)); // Discrete outputs
-                     ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 3); // Analog inputs
-                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 0, 5)); // Discrete inputs
+                     ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 2); // Analog inputs
+                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 0, 6)); // Discrete inputs
                      ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(0, 8258, 1)); // Read flag
                      ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(0, 8260, 1));
                      status = SummQudroArray(ai, di, dq, flag1, flag2);
                  }
-                 catch (SocketException ex)
+                 catch (SocketException)
                  {
                      status = noAnswerArray();
                  }

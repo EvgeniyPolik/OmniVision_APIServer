@@ -404,31 +404,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\polie\\.nuget\\packages\\": {},
-    "D:\\ProgramFiles\\Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+      "projectUniqueName": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
       "projectName": "OmniVision_APIserver",
-      "projectPath": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
-      "packagesPath": "C:\\Users\\polie\\.nuget\\packages\\",
-      "outputPath": "D:\\Rider\\education C#\\OmniVision\\OmniVision\\OmniVision_APIserver\\obj\\",
+      "projectPath": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "D:\\ProgramFiles\\Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\polie\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -486,7 +479,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

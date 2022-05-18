@@ -9,8 +9,7 @@ public class AnaliticMetods
         Connection,
         TemperatureUp,
         DevationTemperature,
-        PressureLow,
-        PressureHigh,
+        PressureError,
         FireAlarm,
         BoillerError,
         NoPower,
@@ -19,13 +18,33 @@ public class AnaliticMetods
         SecurityAlarm,
         SecurityAttention
     }
-
-    public void InsertQuery(int keys, string messgeText)  // Ведение журнала событий
+    private enum QueryType
     {
-        string newQuery =
+        EventLog,
+        HourInfo
+    }
+
+    public void InsertQuery(int keys, int type, string messgeText)  // Ведение журнала событий
+    {
+        string newQuery;
+        if (type == 0)
+        {
+            newQuery =
             $"INSERT INTO EVENET_LOG (E_DATE, E_TIME, E_KOT, E_TEXT) VALUES " +
             $"({doDateOrTimeInString(true)}, {doDateOrTimeInString(false)}, {keys}, " +
             $"'{messgeText}')";
+        }
+        else if (type == 1)
+        {
+            newQuery =
+            $"INSERT INTO HOUR_TABLE (DI_DATE, DI_TIME, DI_KOT, T1, T2) VALUES " +
+            $"({doDateOrTimeInString(true)},{doDateOrTimeInString(false)},{keys}," +
+            $"{messgeText})";
+        }
+        else
+        {
+            newQuery = "";
+        }
         FbCommand insertSql = new FbCommand(newQuery, Program.dbConn);
         Program.dbConn.Open();
         Console.WriteLine(Program.dbConn.State.ToString());
@@ -85,7 +104,7 @@ public class AnaliticMetods
         return result;
     }
     //Сбор информации о новых и действующих угрозах
-    public SortedSet<string> ActiveWarnings(Dictionary<int, ushort[]> bollerStatus)  
+    public SortedSet<string> ActiveWarnings(Dictionary<int, short[]> bollerStatus)  
     {
         SortedSet<string> newActiveWarnings = new SortedSet<string>();
         foreach (var key in bollerStatus)
@@ -96,7 +115,7 @@ public class AnaliticMetods
                 newActiveWarnings.Add(item);
                 if (!Program.Warnings.Contains(item))
                 {
-                    InsertQuery(key.Key, "Обнаружено: отсутствие связи");
+                    InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: отсутствие связи");
                 }
             }
             else
@@ -104,17 +123,65 @@ public class AnaliticMetods
                 string item = key.Key.ToString() + PositionName.Connection.ToString() + "0";
                 if (Program.Warnings.Contains(item))
                 {
-                    InsertQuery(key.Key, "Устранено: отсутствие связи");
+                    InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: отсутствие связи");
                 }
+                // Связь с контроллером установлена, узнаем другие пораметры
+                
+                if (Program.HourStatusAirTemperature.ContainsKey(key.Key)) // Собираем часовую информацию
+                {
+                    if (Program.HourStatusAirTemperature[key.Key][0] == DateTime.Now.Hour)
+                    {
+                        // записываем час учета и количество подсчитаных раз
+                        Program.HourStatusAirTemperature[key.Key][Program.HourStatusAirTemperature[key.Key][1] + 2] = 
+                            bollerStatus[key.Key][1];
+                        Program.HourStatusUpTemperature[key.Key][Program.HourStatusAirTemperature[key.Key][1]] =
+                            bollerStatus[key.Key][2];
+                        Program.HourStatusAirTemperature[key.Key][1]++;
+                    }
+                    else
+                    {
+                        int sumT1 = 0;
+                        int sumT2 = 0;
+                        for (int i = 2; i < Program.HourStatusAirTemperature[key.Key].Length - 2; i++)
+                        {
+                            sumT1 += Program.HourStatusAirTemperature[key.Key][i];
+                            sumT2 += Program.HourStatusUpTemperature[key.Key][i - 2];
 
-                // Температура подачи ниже 35 градусов и включен режим Зима
+                        }
+                        double averageT1 = (double)(sumT1 / Program.HourStatusAirTemperature[key.Key][1]);
+                        double averageT2 = (double)(sumT2 / Program.HourStatusAirTemperature[key.Key][1]);
+                        string text = $"{averageT1}, {averageT2}";
+                        InsertQuery(key.Key, (int)QueryType.HourInfo, text);
+                        Console.WriteLine($"Данные на {doDateOrTimeInString(false)} T1 = {averageT1}, T2 = {averageT2}");
+                        Program.HourStatusAirTemperature[key.Key][0] = (short) DateTime.Now.Hour;
+                        Program.HourStatusAirTemperature[key.Key][1] = 0;    
+                        for (int i = 2; i < Program.HourStatusAirTemperature[key.Key].Length; i++)
+                        {
+                            Program.HourStatusAirTemperature[key.Key][i] = 0;
+                            Program.HourStatusUpTemperature[key.Key][i - 2] = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    Program.HourStatusAirTemperature[key.Key] = new short[242];
+                    Program.HourStatusUpTemperature[key.Key] = new short[240];
+                    Program.HourStatusAirTemperature[key.Key][0] = (short) DateTime.Now.Hour;
+                    Program.HourStatusAirTemperature[key.Key][1] = 0;
+                    for (int i = 2; i < Program.HourStatusAirTemperature[key.Key].Length; i++)
+                    {
+                        Program.HourStatusAirTemperature[key.Key][i] = 0;
+                        Program.HourStatusUpTemperature[key.Key][i - 2] = 0;
+                    }
+                }
+                // Температура подачи ниже 35 градусов и включен режим Зима - Значит что-то не так
                 if ((bollerStatus[key.Key][2] < 35) && (bollerStatus[key.Key][13] == 1))
                 {
                     item = key.Key.ToString() + PositionName.TemperatureUp.ToString() + "0";
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: предельно низкая температура подачи");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: предельно низкая температура подачи");
                     }
                 }
                 else
@@ -122,7 +189,7 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.TemperatureUp.ToString() + "0";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: предельно низкая температура подачи");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: предельно низкая температура подачи");
                     }
                 }
 
@@ -135,7 +202,7 @@ public class AnaliticMetods
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: отклонение от температурного графика");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: отклонение от температурного графика");
                     }
                 }
                 else
@@ -143,53 +210,35 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.DevationTemperature + "1";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: отклонение от температурного графика");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: отклонение от температурного графика");
                     }
                 }
 
-                if ((bollerStatus[key.Key][3] < 1) && (bollerStatus[key.Key][13] == 1)) //Давление теплоносителя низкое
+                if ((bollerStatus[key.Key][3] == 1) && (bollerStatus[key.Key][13] == 1)) // Ошибка давления
                 {
-                    item = key.Key.ToString() + PositionName.PressureLow + "0";
+                    item = key.Key.ToString() + PositionName.PressureError + "1";
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: давление теплонисителя низкое");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: не допустимое давление теплонисителя");
                     }
                 }
                 else
                 {
-                    item = key.Key.ToString() + PositionName.PressureLow + "0";
+                    item = key.Key.ToString() + PositionName.PressureError + "1";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: давление теплонисителя низкое");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: не допустимое давление теплонисителя");
                     }
                 }
 
-                if (bollerStatus[key.Key][3] > 3) //Давление теплоносителя высокое
-                {
-                    item = key.Key.ToString() + PositionName.PressureHigh + "1";
-                    newActiveWarnings.Add(item);
-                    if (!Program.Warnings.Contains(item))
-                    {
-                        InsertQuery(key.Key, "Обнаружено: давление теплонисителя низкое");
-                    }
-                }
-                else
-                {
-                    item = key.Key.ToString() + PositionName.PressureHigh + "1";
-                    if (Program.Warnings.Contains(item))
-                    {
-                        InsertQuery(key.Key, "Устранено: давление теплонисителя низкое");
-                    }
-                }
-                
                 if (bollerStatus[key.Key][5] == 0) // Пожарная тревога
                 {
                     item = key.Key.ToString() + PositionName.FireAlarm + "0";
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: пожарная тревога!");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: пожарная тревога!");
                     }
                 }
                 else
@@ -197,7 +246,7 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.FireAlarm + "0";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: пожарная тревога");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: пожарная тревога");
                     }
                 }
                 if (bollerStatus[key.Key][6] == 1) // Аварийная остановка котла
@@ -206,7 +255,7 @@ public class AnaliticMetods
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: аварийная остановка котла");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: аварийная остановка котла");
                     }
                 }
                 else
@@ -214,7 +263,7 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.BoillerError + "1";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: аварийная остановка котла");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: аварийная остановка котла");
                     }
                 }
                 if (bollerStatus[key.Key][7] == 0) // Отключение питания
@@ -223,7 +272,7 @@ public class AnaliticMetods
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: отключение питания");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: отключение питания");
                     }
                 }
                 else
@@ -231,7 +280,7 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.NoPower + "0";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: отключение питания");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: отключение питания");
                     }
                 }
                 if (bollerStatus[key.Key][8] == 0) // Загазованность
@@ -240,7 +289,7 @@ public class AnaliticMetods
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: загазованность помещения");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: загазованность помещения");
                     }
                 }
                 else
@@ -248,16 +297,16 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.GazAlarm + "1";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: загазованность помещения");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: загазованность помещения");
                     }
                 }
-                if (bollerStatus[key.Key][9] == 0) // Статус котла
+                if ((bollerStatus[key.Key][9] == 0)  && (bollerStatus[key.Key][13] == 1))// Статус котла
                 {
                     item = key.Key.ToString() + PositionName.StateBoiller + "1";
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: котел выключен");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: котел выключен");
                     }
                 }
                 else
@@ -265,16 +314,16 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.StateBoiller + "1";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: котел включен");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: котел включен");
                     }
                 }
-                if (bollerStatus[key.Key][10] == 0) // Охранная тревога
+                if (bollerStatus[key.Key][10] == 1) // Охранная тревога
                 {
                     item = key.Key.ToString() + PositionName.SecurityAlarm + "1";
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Обнаружено: проникновение, нарушение периметра");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Обнаружено: проникновение, нарушение периметра");
                     }
                 }
                 else
@@ -282,7 +331,7 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.SecurityAlarm + "1";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Устранено: проникновение, нарушение периметра");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Устранено: проникновение, нарушение периметра");
                     }
                 }
                 if (bollerStatus[key.Key][14] == 0) // Снятие с охраны
@@ -291,7 +340,7 @@ public class AnaliticMetods
                     newActiveWarnings.Add(item);
                     if (!Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Объект снят с охраны");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Объект снят с охраны");
                     }
                 }
                 else
@@ -299,7 +348,7 @@ public class AnaliticMetods
                     item = key.Key.ToString() + PositionName.SecurityAttention + "1";
                     if (Program.Warnings.Contains(item))
                     {
-                        InsertQuery(key.Key, "Объект поставлен под охрану");
+                        InsertQuery(key.Key, (int) QueryType.EventLog,"Объект поставлен под охрану");
                     }
                 }
             }
