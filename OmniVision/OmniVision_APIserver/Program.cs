@@ -114,12 +114,15 @@ namespace OmniVision_APIserver
                      TcpClient clientTCP = new TcpClient(ListOfBollers[i].Ip, 502);
                      var targetKontroller = new ModbusFactory();
                      IModbusMaster modbusServer = targetKontroller.CreateMaster(clientTCP);
+                     modbusServer.Transport.Retries = 0;
+                     modbusServer.Transport.ReadTimeout = 1500;
                      ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0, 8192, 4)); // Discrete outputs
                      ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 2); // Analog inputs
                      ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 0, 6)); // Discrete inputs
                      ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(0, 8258, 1)); // Read flag
                      ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(0, 8260, 1));
                      status = SummQudroArray(ai, di, dq, flag1, flag2);
+                     clientTCP.Close();
                  }
                  catch (SocketException)
                  {

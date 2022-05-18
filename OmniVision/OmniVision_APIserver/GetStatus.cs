@@ -16,11 +16,6 @@ public class GetStatus : Controller
         if (Program.HealthBoller.ContainsKey(id))
         {
             result = JsonConvert.SerializeObject(Program.HealthBoller[id]);
-            // Commands ggg = new Commands(2, 3);
-            // string ttt = JsonConvert.SerializeObject(ggg);
-            // Console.WriteLine(ttt);
-            // Commands ddd = JsonConvert.DeserializeObject<Commands>(ttt);
-            // result = ddd.ToString();
         } 
         return result;
     }
@@ -28,7 +23,12 @@ public class GetStatus : Controller
     [HttpPost]
     public IActionResult ProcesorComand([FromBody]Commands cmd)
     {
+        if (cmd == null)
+        {
+            return BadRequest();
+        }
         Console.WriteLine(cmd.ToString());
+        Commands.ExucuteCmd(cmd.Id, cmd.Command);
         return new OkResult();
     }
 }
