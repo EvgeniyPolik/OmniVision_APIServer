@@ -26,6 +26,8 @@ namespace OmniVision_APIserver
         public static FbConnection dbConn = new FbConnection();
         public static Dictionary<int, short[]> HourStatusAirTemperature = new Dictionary<int, short[]>();
         public static Dictionary<int, short[]> HourStatusUpTemperature = new Dictionary<int, short[]>();
+        public static string BusyIp = "noBusy";
+        public static string BusyCmd = "noBusy";
 
         private static ushort[] BoolToUshort(bool[] originArray)
         {
@@ -109,6 +111,11 @@ namespace OmniVision_APIserver
              for (int i = 0; i < ListOfBollers.Count; i++)
              {
                  short[] status = new short[4];
+                 if ((BusyIp == ListOfBollers[i].Ip) || (BusyCmd == ListOfBollers[i].Ip))
+                 {
+                     Thread.Sleep(500);
+                 }
+                 BusyIp = ListOfBollers[i].Ip;
                  try
                  {
                      TcpClient clientTCP = new TcpClient(ListOfBollers[i].Ip, 502);
@@ -124,11 +131,12 @@ namespace OmniVision_APIserver
                      status = SummQudroArray(ai, di, dq, flag1, flag2);
                      clientTCP.Close();
                  }
-                 catch (SocketException)
+                 catch (Exception)
                  {
                      status = noAnswerArray();
                  }
-
+ 
+                 BusyIp = "noBusy";
                  newHeathStatus[ListOfBollers[i].Id] = status;
 
              }

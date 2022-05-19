@@ -47,7 +47,6 @@ public class AnaliticMetods
         }
         FbCommand insertSql = new FbCommand(newQuery, Program.dbConn);
         Program.dbConn.Open();
-        Console.WriteLine(Program.dbConn.State.ToString());
         FbTransaction fbt = Program.dbConn.BeginTransaction();
         insertSql.Transaction = fbt;
         insertSql.ExecuteNonQuery();

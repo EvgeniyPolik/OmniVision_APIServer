@@ -27,8 +27,14 @@ public class GetStatus : Controller
         {
             return BadRequest();
         }
-        Console.WriteLine(cmd.ToString());
-        Commands.ExucuteCmd(cmd.Id, cmd.Command);
-        return new OkResult();
+
+        if (Commands.ExucuteCmd(cmd.Id, cmd.Command))
+        {
+            return new OkResult();
+        }
+        else
+        {
+            return BadRequest();
+        }
     }
 }
