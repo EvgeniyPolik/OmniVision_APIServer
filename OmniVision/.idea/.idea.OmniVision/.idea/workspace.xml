@@ -5,31 +5,7 @@
     <projectFile profileName="IIS Express">OmniVision_APIserver/OmniVision_APIserver.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3243d9d2-2b05-411b-9704-b454a8b88978" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Comand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Comand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/GetStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/GetStatus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.genruntimeconfig.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/apphost.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/ref/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/ref/OmniVision_APIserver.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/refint/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/refint/OmniVision_APIserver.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/staticwebassets.pack.sentinel" afterDir="false" />
-    </list>
+    <list default="true" id="3243d9d2-2b05-411b-9704-b454a8b88978" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652632943732</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Есть получение внешних команд">
+      <created>1652897943530</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652897943530</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +162,7 @@
     <MESSAGE value="Есть реализация получения и обновления первичного списка в отдельном потоке." />
     <MESSAGE value="Организован опрос приборов. Организован поток для обновления списка и постоянного опроса" />
     <MESSAGE value="Опрос и исключение с ошибкой связи" />
-    <option name="LAST_COMMIT_MESSAGE" value="Опрос и исключение с ошибкой связи" />
+    <MESSAGE value="Есть получение внешних команд" />
+    <option name="LAST_COMMIT_MESSAGE" value="Есть получение внешних команд" />
   </component>
 </project>
