@@ -28,8 +28,13 @@ namespace OmniVision_APIserver
         public static Dictionary<int, short[]> HourStatusUpTemperature = new Dictionary<int, short[]>();
         public static string BusyIp = "noBusy";
         public static string BusyCmd = "noBusy";
+        public enum TypePlc
+        {
+            siemens,
+            onisystem
+        }
 
-        private static ushort[] BoolToUshort(bool[] originArray)
+        private static ushort[] BoolToUshort(bool[] originArray)  // Преобразование массива bool в ushort
         {
             ushort[] makedArrey = new ushort[originArray.Length];
             for (int i = 0; i < originArray.Length; i++)
@@ -104,13 +109,36 @@ namespace OmniVision_APIserver
 
             }
         }
-        
+
+        private static Dictionary<string, ushort[]> AdressInPlc(TypePlc plc)
+        {
+            Dictionary<string, ushort[]> result = new Dictionary<string, ushort[]>();
+            
+            if (plc == TypePlc.siemens)
+            {
+                result["DI"] = new ushort[] {0, 6};
+                result["DO"] = new ushort[] {8192, 4};
+                result["AI"] = new ushort[] {0, 2};
+                result["Flag1"] = new ushort[] {8258, 1};
+                result["Flag2"] = new ushort[] {8260, 1};
+            }
+            else if (plc == TypePlc.onisystem)
+            {
+                result["DI"] = new ushort[] {0, 6};
+                result["DO"] = new ushort[] {4096, 4};
+                result["AI"] = new ushort[] {0, 2};
+                result["Flag1"] = new ushort[] {1540, 1};
+                result["Flag2"] = new ushort[] {1537, 1};
+            }
+
+            return result;
+        }
          private static Dictionary<int, short[]> UpdHealth()  // Обновление списка состояния котельных
          {
              Dictionary<int, short[]> newHeathStatus = new Dictionary<int, short[]>();
              for (int i = 0; i < ListOfBollers.Count; i++)
              {
-                 short[] status = new short[4];
+                 short[] status = new short[15];
                  if ((BusyIp == ListOfBollers[i].Ip) || (BusyCmd == ListOfBollers[i].Ip))
                  {
                      Thread.Sleep(500);
@@ -123,11 +151,26 @@ namespace OmniVision_APIserver
                      IModbusMaster modbusServer = targetKontroller.CreateMaster(clientTCP);
                      modbusServer.Transport.Retries = 0;
                      modbusServer.Transport.ReadTimeout = 1500;
-                     ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0, 8192, 4)); // Discrete outputs
-                     ushort[] ai = modbusServer.ReadInputRegisters(0, 0, 2); // Analog inputs
-                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 0, 6)); // Discrete inputs
-                     ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(0, 8258, 1)); // Read flag
-                     ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(0, 8260, 1));
+                     Dictionary<string, ushort[]> AddressOfRegistr = new Dictionary<string, ushort[]>();
+                     if (ListOfBollers[i].ShemaControl == 1) // 1 Это сименс
+                     {
+                         AddressOfRegistr = AdressInPlc(TypePlc.siemens);
+                     }
+                     else if (ListOfBollers[i].ShemaControl == 2) // 2 Это они онисистемс
+                     {
+                         AddressOfRegistr = AdressInPlc(TypePlc.onisystem);
+                     }
+
+                     ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0,
+                         AddressOfRegistr["DO"][0], AddressOfRegistr["DO"][1])); // Discrete outputs
+                     ushort[] ai = modbusServer.ReadInputRegisters(0, AddressOfRegistr["AI"][0], 
+                         AddressOfRegistr["AI"][1]); // Analog inputs
+                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 
+                         AddressOfRegistr["DI"][0], AddressOfRegistr["DI"][1])); // Discrete inputs
+                     ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(0, 
+                         AddressOfRegistr["Flag1"][0], AddressOfRegistr["Flag1"][1])); // Read flag
+                     ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(0, 
+                         AddressOfRegistr["Flag2"][0], AddressOfRegistr["Flag2"][1]));
                      status = SummQudroArray(ai, di, dq, flag1, flag2);
                      clientTCP.Close();
                  }

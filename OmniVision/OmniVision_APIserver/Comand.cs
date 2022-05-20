@@ -6,12 +6,6 @@ namespace OmniVision_APIserver;
 [Serializable]
 public class Commands
 {
-    private enum comandRegistry
-    {
-        resetErrorBoller = 8256,
-        switchSecurity = 8257,
-        switchWinter = 8259
-    }
     public int Id  { get; set; }
     public int Command { get; set; }
     //{"Id":0,"Command":0}
@@ -46,12 +40,25 @@ public class Commands
 
     public static bool ExucuteCmd(int ids, int cmd)
     {
+        Dictionary<int, ushort> registers = new Dictionary<int, ushort>();
         for (int i = 0; i < Program.ListOfBollers.Count; i++)
         {
             string ipAdress = "No ip-address";
             if (Program.ListOfBollers[i].Id == ids)
             {
                 ipAdress = Program.ListOfBollers[i].Ip;
+                if (Program.ListOfBollers[i].ShemaControl == 1)
+                {
+                    registers[1] = 8257; // Security
+                    registers[2] = 8256; // ResetError
+                    registers[3] = 8259; // Winter
+                }
+                else if (Program.ListOfBollers[i].ShemaControl == 2)
+                {
+                    registers[1] = 1537; // Security
+                    registers[2] = 1538; // ResetError
+                    registers[3] = 1540; // Winter
+                }
             }
 
             if (ipAdress != "No ip-address")
@@ -69,28 +76,8 @@ public class Commands
                     modbusServer.Transport.Retries = 0;
                     modbusServer.Transport.ReadTimeout = 1500;
                     modbusServer.Transport.WriteTimeout = 1500;
-                    if (cmd == 1)  // Включение или отключение охраны
-                    {
-                        ProccesingCmd(modbusServer, clientTCP,(ushort) comandRegistry.switchSecurity);
-                        return true;
-                    }
-                    else if (cmd == 2) // Сброс аварии котла
-                    {
-                        ProccesingCmd(modbusServer, clientTCP, (ushort) comandRegistry.resetErrorBoller);
-                        return true;
-                    }
-                    else if (cmd == 3) // Перевод режима зима/лето
-                    {
-                        ProccesingCmd(modbusServer, clientTCP, (ushort) comandRegistry.switchWinter);
-                        return true;
-                    }
-                    else
-                    {
-                        clientTCP.Close();
-                        Program.BusyCmd = "noBusy";
-                        return false;
-                    }
-                    
+                    ProccesingCmd(modbusServer, clientTCP, registers[cmd]); 
+                    return true;
                 }
                 catch (Exception e)
                 {
