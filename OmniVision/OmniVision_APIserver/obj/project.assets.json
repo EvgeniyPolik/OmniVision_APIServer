@@ -410,11 +410,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Rider\\education C#\\Ulearn\\percent\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+      "projectUniqueName": "D:\\Rider\\education C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
       "projectName": "OmniVision_APIserver",
-      "projectPath": "D:\\Rider\\education C#\\Ulearn\\percent\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+      "projectPath": "D:\\Rider\\education C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
       "packagesPath": "C:\\Users\\polie\\.nuget\\packages\\",
-      "outputPath": "D:\\Rider\\education C#\\Ulearn\\percent\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\obj\\",
+      "outputPath": "D:\\Rider\\education C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\ProgramFiles\\Visual Studio\\Shared\\NuGetPackages"

@@ -52,7 +52,6 @@ public class AnaliticMetods
         insertSql.ExecuteNonQuery();
         fbt.Commit();
         Program.dbConn.Close();
-        Console.WriteLine(messgeText);
     }
     public string doDateOrTimeInString(bool doDate)  // Дата или время в нужном формате
     {
@@ -151,7 +150,6 @@ public class AnaliticMetods
                         double averageT2 = (double)(sumT2 / Program.HourStatusAirTemperature[key.Key][1]);
                         string text = $"{averageT1}, {averageT2}";
                         InsertQuery(key.Key, (int)QueryType.HourInfo, text);
-                        Console.WriteLine($"Данные на {doDateOrTimeInString(false)} T1 = {averageT1}, T2 = {averageT2}");
                         Program.HourStatusAirTemperature[key.Key][0] = (short) DateTime.Now.Hour;
                         Program.HourStatusAirTemperature[key.Key][1] = 0;    
                         for (int i = 2; i < Program.HourStatusAirTemperature[key.Key].Length; i++)

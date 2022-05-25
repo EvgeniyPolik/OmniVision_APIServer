@@ -32,7 +32,6 @@ public class Commands
         mServer.WriteSingleCoil(0, registr, true);
         Thread.Sleep(500);
         mServer.WriteSingleCoil(0, registr, false);
-        Console.WriteLine("Команда " + registr.ToString()); 
         tcpClient.Close();
         Program.BusyCmd = "noBusy";
         return true;

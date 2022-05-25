@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Zb3gzO+cyTg6kzP6grBBszseI0QWywKcZIZCOerGkxRta+a2+HmxkbyXbeoJzXeIDxE7B5L9wRjFWEnUZDBFjA==",
+  "dgSpecHash": "x8AEQ215DzBsS4D6OyrmLFZ97uPkfuZ3Jf5hnTMxPJXAkMwmxVbT2e724yPpET8P2PA9gsaeF6br7EZqi4mJ3w==",
   "success": true,
-  "projectFilePath": "D:\\Rider\\education C#\\Ulearn\\percent\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
+  "projectFilePath": "D:\\Rider\\education C#\\OmniVision\\OmniVision_APIServer\\OmniVision\\OmniVision_APIserver\\OmniVision_APIserver.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\polie\\.nuget\\packages\\firebirdsql.data.firebirdclient\\9.0.1\\firebirdsql.data.firebirdclient.9.0.1.nupkg.sha512",
     "C:\\Users\\polie\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
