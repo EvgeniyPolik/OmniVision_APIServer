@@ -72,10 +72,7 @@ namespace OmniVision_APIserver
     
             result[analogInp.Length + discreteInp.Length + discreteOut.Length + 1] = (short)flag1[0];
             result[analogInp.Length + discreteInp.Length + discreteOut.Length + 2] = (short)flag2[0];
-        
-            for (int i = 0; i < result.Length; i++)
-            {Console.Write(result[i].ToString() + " ");}
-            Console.WriteLine();
+            
             return result;
         }
 
@@ -95,7 +92,6 @@ namespace OmniVision_APIserver
                 if (countRepit > 119)  // Переодическое бновление списка котельных
                 {
                     ListOfBollers = MadeNewCatalog();
-                    Console.WriteLine("Update catalog: " + DateTime.Now);
                     HealthBoller = UpdHealth();
                     countRepit = 0;
                     Thread.Sleep(15 * 1000);
@@ -239,7 +235,6 @@ namespace OmniVision_APIserver
         {
 
             dbConn.Open(); // Активируем коннект
-            Console.WriteLine(dbConn.State.ToString());
             FbTransaction fbt = dbConn.BeginTransaction(); //  Создадим транзакцию
             FbCommand selectSql = new FbCommand("SELECT ID_K, NAM_K, TIP_NP, NAM_NP, TIP_U, NAM_U, K_DOM, IP_ADR, SHEMA_K " +
                                                 "FROM KOT LEFT JOIN NP ON K_NP = ID_NP LEFT JOIN ULC ON ID_U = K_U WHERE " +
