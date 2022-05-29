@@ -81,8 +81,11 @@ public class Commands
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    Program.BusyCmd = "noBusy";
                     return false;
+                }
+                finally
+                {                    
+                    Program.BusyCmd = "noBusy";
                 }
             }
         }

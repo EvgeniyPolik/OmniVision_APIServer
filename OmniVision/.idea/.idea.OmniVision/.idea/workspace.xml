@@ -5,7 +5,12 @@
     <projectFile profileName="IIS Express">OmniVision_APIserver/OmniVision_APIserver.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3243d9d2-2b05-411b-9704-b454a8b88978" name="Changes" comment="" />
+    <list default="true" id="3243d9d2-2b05-411b-9704-b454a8b88978" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Comand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Comand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/staticwebassets.pack.sentinel" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,6 +105,8 @@
       <workItem from="1652365791994" duration="8924000" />
       <workItem from="1652411197944" duration="23331000" />
       <workItem from="1653489488190" duration="268000" />
+      <workItem from="1653489840865" duration="2704000" />
+      <workItem from="1653845266987" duration="664000" />
     </task>
     <task id="LOCAL-00001" summary="Есть реализация получения и обновления первичного списка в отдельном потоке.">
       <created>1652436949566</created>
@@ -122,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653489701848</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Убраны отладочные сообщения">
+      <created>1653490131072</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1653490131072</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +160,7 @@
     <MESSAGE value="Есть реализация получения и обновления первичного списка в отдельном потоке." />
     <MESSAGE value="начало суточного тестирования. Все методы реализованы" />
     <MESSAGE value="Убраны тестировочные сообщения. Производственное тестирование." />
-    <option name="LAST_COMMIT_MESSAGE" value="Убраны тестировочные сообщения. Производственное тестирование." />
+    <MESSAGE value="Убраны отладочные сообщения" />
+    <option name="LAST_COMMIT_MESSAGE" value="Убраны отладочные сообщения" />
   </component>
 </project>

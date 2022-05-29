@@ -159,13 +159,13 @@ namespace OmniVision_APIserver
 
                      ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0,
                          AddressOfRegistr["DO"][0], AddressOfRegistr["DO"][1])); // Discrete outputs
-                     ushort[] ai = modbusServer.ReadInputRegisters(0, AddressOfRegistr["AI"][0], 
+                     ushort[] ai = modbusServer.ReadInputRegisters(0, AddressOfRegistr["AI"][0],
                          AddressOfRegistr["AI"][1]); // Analog inputs
-                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0, 
+                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0,
                          AddressOfRegistr["DI"][0], AddressOfRegistr["DI"][1])); // Discrete inputs
-                     ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(0, 
+                     ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(0,
                          AddressOfRegistr["Flag1"][0], AddressOfRegistr["Flag1"][1])); // Read flag
-                     ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(0, 
+                     ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(0,
                          AddressOfRegistr["Flag2"][0], AddressOfRegistr["Flag2"][1]));
                      status = SummQudroArray(ai, di, dq, flag1, flag2);
                      clientTCP.Close();
@@ -174,8 +174,10 @@ namespace OmniVision_APIserver
                  {
                      status = noAnswerArray();
                  }
- 
-                 BusyIp = "noBusy";
+                 finally
+                 {
+                     BusyIp = "noBusy"; 
+                 }
                  newHeathStatus[ListOfBollers[i].Id] = status;
 
              }
