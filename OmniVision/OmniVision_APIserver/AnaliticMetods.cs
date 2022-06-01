@@ -51,6 +51,7 @@ public class AnaliticMetods
         insertSql.Transaction = fbt;
         insertSql.ExecuteNonQuery();
         fbt.Commit();
+        insertSql.Dispose();  // Уничтожим объект для освобождения памяти 
         Program.dbConn.Close();
     }
     public string doDateOrTimeInString(bool doDate)  // Дата или время в нужном формате

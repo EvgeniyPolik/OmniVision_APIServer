@@ -7,8 +7,24 @@
   <component name="ChangeListManager">
     <list default="true" id="3243d9d2-2b05-411b-9704-b454a8b88978" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Comand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Comand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/AnaliticMetods.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/AnaliticMetods.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/OmniVision_APIserver.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/Debug/net6.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/OmniVision_APIserver.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/obj/staticwebassets.pack.sentinel" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,9 +120,7 @@
       <updated>1652365791992</updated>
       <workItem from="1652365791994" duration="8924000" />
       <workItem from="1652411197944" duration="23331000" />
-      <workItem from="1653489488190" duration="268000" />
-      <workItem from="1653489840865" duration="2704000" />
-      <workItem from="1653845266987" duration="664000" />
+      <workItem from="1654053925523" duration="3754000" />
     </task>
     <task id="LOCAL-00001" summary="Есть реализация получения и обновления первичного списка в отдельном потоке.">
       <created>1652436949566</created>
@@ -122,21 +136,7 @@
       <option name="project" value="LOCAL" />
       <updated>1652961539357</updated>
     </task>
-    <task id="LOCAL-00003" summary="Убраны тестировочные сообщения. Производственное тестирование.">
-      <created>1653489701848</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1653489701848</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Убраны отладочные сообщения">
-      <created>1653490131072</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1653490131072</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,8 +159,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Есть реализация получения и обновления первичного списка в отдельном потоке." />
     <MESSAGE value="начало суточного тестирования. Все методы реализованы" />
-    <MESSAGE value="Убраны тестировочные сообщения. Производственное тестирование." />
-    <MESSAGE value="Убраны отладочные сообщения" />
-    <option name="LAST_COMMIT_MESSAGE" value="Убраны отладочные сообщения" />
+    <option name="LAST_COMMIT_MESSAGE" value="начало суточного тестирования. Все методы реализованы" />
   </component>
 </project>

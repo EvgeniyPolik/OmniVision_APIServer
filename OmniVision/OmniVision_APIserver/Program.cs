@@ -82,15 +82,41 @@ namespace OmniVision_APIserver
 
             return result;
         }
+
+
+        private static void DeleteOldRow(bool deleteEvent)
+        {
+            dbConn.Open(); // Активируем коннект
+            FbTransaction fbt = dbConn.BeginTransaction(); //  Создадим транзакцию
+            FbCommand deleteSQL =
+                new FbCommand();
+            if (deleteEvent)
+            {
+                deleteSQL = new FbCommand("DELETE FROM EVENET_LOG WHERE E_DATE < CURRENT_DATE - INTERVAL 1 YEAR", dbConn);
+            }
+            else
+            {
+                deleteSQL = new FbCommand("DELETE FROM HOUR_TABLE WHERE DI_DATE < CURRENT_DATE - INTERVAL 1 YEAR", dbConn);
+            }
+
+            deleteSQL.Transaction = fbt; // Инициализация запроса транзакцией
+            deleteSQL.ExecuteReader(); // Выполним запрос
+            fbt.Commit();
+            deleteSQL.Dispose();  // Уничтожим объект для освобождения памяти        
+            dbConn.Close(); 
+        }
         
         private static void UpdateCatalog()  // поток обновления информации
         {
             int countRepit = 120;
             dbConn = MadeConnectDb();  // Создание конекта к БД
+            Console.WriteLine("Server started in " + DateTime.Now);
             while (true)
             {
-                if (countRepit > 119)  // Переодическое бновление списка котельных
+                if (countRepit > 119)  // Переодическое обновление списка котельных
                 {
+                    DeleteOldRow(true);
+                    DeleteOldRow(false);
                     ListOfBollers = MadeNewCatalog();
                     HealthBoller = UpdHealth();
                     countRepit = 0;
@@ -252,7 +278,7 @@ namespace OmniVision_APIserver
             }
             
             reader.Close(); // Обязательно закрываем запрос
-            dbConn.Close();
+            dbConn.Close(); 
             return ListOfBollers;
         }
 
