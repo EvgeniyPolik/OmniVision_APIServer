@@ -92,15 +92,15 @@ namespace OmniVision_APIserver
                 new FbCommand();
             if (deleteEvent)
             {
-                deleteSQL = new FbCommand("DELETE FROM EVENET_LOG WHERE E_DATE < CURRENT_DATE - INTERVAL 1 YEAR", dbConn);
+                deleteSQL = new FbCommand("DELETE FROM EVENET_LOG WHERE E_DATE < DATEADD(-1 YEAR TO CURRENT_DATE)", dbConn);
             }
             else
             {
-                deleteSQL = new FbCommand("DELETE FROM HOUR_TABLE WHERE DI_DATE < CURRENT_DATE - INTERVAL 1 YEAR", dbConn);
+                deleteSQL = new FbCommand("DELETE FROM HOUR_TABLE WHERE DI_DATE < DATEADD(-1 YEAR TO CURRENT_DATE)", dbConn);
             }
 
             deleteSQL.Transaction = fbt; // Инициализация запроса транзакцией
-            deleteSQL.ExecuteReader(); // Выполним запрос
+            deleteSQL.ExecuteNonQuery(); // Выполним запрос
             fbt.Commit();
             deleteSQL.Dispose();  // Уничтожим объект для освобождения памяти        
             dbConn.Close(); 
@@ -128,7 +128,7 @@ namespace OmniVision_APIserver
                     countRepit++;
                     Thread.Sleep(15 * 1000);
                 }
-
+            
             }
         }
 
@@ -168,6 +168,16 @@ namespace OmniVision_APIserver
                  BusyIp = ListOfBollers[i].Ip;
                  try
                  {
+                     // Проверим доступность для установки TimeOut
+                     Socket socket =  new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                     IAsyncResult result = socket.BeginConnect(ListOfBollers[i].Ip, 502, null, null );
+                     bool success = result.AsyncWaitHandle.WaitOne( 1000, true );
+                     socket.Close();
+                     if (!success)
+                     {
+                         throw new ApplicationException("Failed to connect ModBusServer.");
+                     }
+                     // Если контроллер доступен то сосздаем TCPclient
                      TcpClient clientTCP = new TcpClient(ListOfBollers[i].Ip, 502);
                      var targetKontroller = new ModbusFactory();
                      IModbusMaster modbusServer = targetKontroller.CreateMaster(clientTCP);
@@ -205,7 +215,6 @@ namespace OmniVision_APIserver
                      BusyIp = "noBusy"; 
                  }
                  newHeathStatus[ListOfBollers[i].Id] = status;
-
              }
 
              AnaliticMetods analitics = new AnaliticMetods();
