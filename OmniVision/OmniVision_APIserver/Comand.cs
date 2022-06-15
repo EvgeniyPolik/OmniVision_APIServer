@@ -54,9 +54,9 @@ public class Commands
                 }
                 else if (Program.ListOfBollers[i].ShemaControl == 2)
                 {
-                    registers[1] = 1537; // Security
+                    registers[1] = 1536; // Security
                     registers[2] = 1538; // ResetError
-                    registers[3] = 1540; // Winter
+                    registers[3] = 1539; // Winter
                 }
             }
 

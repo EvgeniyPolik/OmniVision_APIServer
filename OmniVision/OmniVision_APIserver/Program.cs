@@ -146,9 +146,9 @@ namespace OmniVision_APIserver
             }
             else if (plc == TypePlc.onisystem)
             {
-                result["DI"] = new ushort[] {0, 6};
+                result["DI"] = new ushort[] {2, 6};
                 result["DO"] = new ushort[] {4096, 4};
-                result["AI"] = new ushort[] {0, 2};
+                result["AI"] = new ushort[] {1024, 2};
                 result["Flag1"] = new ushort[] {1540, 1};
                 result["Flag2"] = new ushort[] {1537, 1};
             }
@@ -175,6 +175,7 @@ namespace OmniVision_APIserver
                      socket.Close();
                      if (!success)
                      {
+                         Console.WriteLine($"{ListOfBollers[i].Ip}: Нет связи");
                          throw new ApplicationException("Failed to connect ModBusServer.");
                      }
                      // Если контроллер доступен то сосздаем TCPclient
@@ -193,21 +194,39 @@ namespace OmniVision_APIserver
                          AddressOfRegistr = AdressInPlc(TypePlc.onisystem);
                      }
 
-                     ushort[] dq = BoolToUshort(modbusServer.ReadCoils(0,
+                     ushort[] dq = BoolToUshort(modbusServer.ReadCoils(1,
                          AddressOfRegistr["DO"][0], AddressOfRegistr["DO"][1])); // Discrete outputs
-                     ushort[] ai = modbusServer.ReadInputRegisters(0, AddressOfRegistr["AI"][0],
-                         AddressOfRegistr["AI"][1]); // Analog inputs
-                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(0,
+                     ushort[] ai = new ushort[2]; // Analog inputs
+                     if (ListOfBollers[i].ShemaControl == 1)
+                     {
+                         ai = modbusServer.ReadInputRegisters(1, AddressOfRegistr["AI"][0],
+                             AddressOfRegistr["AI"][1]); // Analog inputs
+                     }
+                     else if (ListOfBollers[i].ShemaControl == 2)
+                     {
+                         ai = modbusServer.ReadHoldingRegisters(1, AddressOfRegistr["AI"][0],
+                             AddressOfRegistr["AI"][1]); // Analog inputs
+                     }
+
+                     ushort[] di = BoolToUshort(modbusServer.ReadInputs(1,
                          AddressOfRegistr["DI"][0], AddressOfRegistr["DI"][1])); // Discrete inputs
-                     ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(0,
+                     ushort[] flag1 = BoolToUshort(modbusServer.ReadCoils(1,
                          AddressOfRegistr["Flag1"][0], AddressOfRegistr["Flag1"][1])); // Read flag
-                     ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(0,
+                     ushort[] flag2 = BoolToUshort(modbusServer.ReadCoils(1,
                          AddressOfRegistr["Flag2"][0], AddressOfRegistr["Flag2"][1]));
                      status = SummQudroArray(ai, di, dq, flag1, flag2);
                      clientTCP.Close();
+                     Console.Write($"{ListOfBollers[i].Ip}: ");
+                     for (int j = 0; j < status.Length; j++)
+                     {
+                         Console.Write($"{status[j]}, ");
+                     }
+                     Console.WriteLine();
                  }
-                 catch (Exception)
+                 catch (Exception e)
                  {
+                     Console.WriteLine($"{ListOfBollers[i].Ip}: ");
+                     Console.WriteLine(e);
                      status = noAnswerArray();
                  }
                  finally

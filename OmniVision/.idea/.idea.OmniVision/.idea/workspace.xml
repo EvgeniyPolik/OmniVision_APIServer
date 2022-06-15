@@ -7,6 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3243d9d2-2b05-411b-9704-b454a8b88978" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OmniVision/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Comand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Comand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OmniVision_APIserver/bin/Debug/net6.0/OmniVision_APIserver.pdb" afterDir="false" />
@@ -108,7 +109,13 @@
       <workItem from="1652365791994" duration="8924000" />
       <workItem from="1652411197944" duration="23331000" />
       <workItem from="1654053925523" duration="4104000" />
-      <workItem from="1654504997850" duration="7330000" />
+      <workItem from="1654504997850" duration="7625000" />
+      <workItem from="1654514128015" duration="48000" />
+      <workItem from="1654516216385" duration="357000" />
+      <workItem from="1654571589171" duration="732000" />
+      <workItem from="1654686578198" duration="800000" />
+      <workItem from="1654830329352" duration="6962000" />
+      <workItem from="1655270377529" duration="3015000" />
     </task>
     <task id="LOCAL-00001" summary="Есть реализация получения и обновления первичного списка в отдельном потоке.">
       <created>1652436949566</created>
@@ -131,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654063330306</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Внедрен TimeOut">
+      <created>1654513167574</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1654513167574</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,6 +169,7 @@
     <MESSAGE value="Есть реализация получения и обновления первичного списка в отдельном потоке." />
     <MESSAGE value="начало суточного тестирования. Все методы реализованы" />
     <MESSAGE value="Удаление старых записей" />
-    <option name="LAST_COMMIT_MESSAGE" value="Удаление старых записей" />
+    <MESSAGE value="Внедрен TimeOut" />
+    <option name="LAST_COMMIT_MESSAGE" value="Внедрен TimeOut" />
   </component>
 </project>
